@@ -1543,6 +1543,7 @@ static struct ice_device *get_ice_device_from_storage_type
 					(const char *storage_type)
 {
 	struct ice_device *ice_dev = NULL;
+	pr_err("%s: get_device_from_storage_type: storage type is %s\n", __func__, storage_type);
 
 	if (list_empty(&ice_devices)) {
 		pr_err("%s: invalid device list\n", __func__);
@@ -1565,6 +1566,7 @@ static int enable_ice_setup(struct ice_device *ice_dev)
 	int ret = -1, vote;
 
 	/* Setup Regulator */
+	
 	if (ice_dev->is_regulator_available) {
 		if (qcom_ice_get_vreg(ice_dev)) {
 			pr_err("%s: Could not get regulator\n", __func__);
