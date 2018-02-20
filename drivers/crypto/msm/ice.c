@@ -1655,6 +1655,11 @@ int qcom_ice_setup_ice_hw(const char *storage_type, int enable)
 	ice_dev = get_ice_device_from_storage_type(storage_type);
 	if (!ice_dev)
 		return ret;
+	
+	if (ice_dev == ERR_PTR(-EPROBE_DEFER)){
+		pr_err("%s: Hopwood: temporarily handling error\n", __func__);
+                return -EPROBE_DEFER;
+	}
 
 	if (enable)
 		return enable_ice_setup(ice_dev);
